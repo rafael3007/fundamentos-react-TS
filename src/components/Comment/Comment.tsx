@@ -2,7 +2,16 @@ import { ThumbsUp, Trash } from "phosphor-react";
 import styles from "./Comment.module.css";
 import { Avatar } from "../Avatar/Avatar";
 import { useState } from "react";
-import { dateFormatToNow, dateFormattPublished } from "../../utils/format-date";
+import { dateFormatToNow, dateFormattPublished } from "../../utils/format-date"; 
+import { Author } from "../types/Post/Author";
+
+interface CommentProps {
+  index: number;
+  onRemoveComment: (index: number) => void;
+  comment: string;
+  publishedAt: Date;
+  author: Author;
+}
 
 export function Comment({
   index,
@@ -10,14 +19,14 @@ export function Comment({
   comment,
   author,
   onRemoveComment,
-}) {
+}: CommentProps) {
   const [likeCount, setlikeCount] = useState(0);
 
   const publishedDateFormatted = dateFormattPublished(publishedAt);
 
   const publishedDateRelativeToNow = dateFormatToNow(publishedAt);
 
-  function handleLikeComment() {
+  function handleLikeComment(): void {
     setlikeCount((state) => {
       return state + 1;
     });
@@ -25,7 +34,7 @@ export function Comment({
 
   return (
     <div className={styles.comment}>
-      <Avatar hasBorder={false} src={author.avatarUrl} alt="" />
+      <Avatar hasBorder={false} src={author.avatarUrl} />
 
       <div className={styles.commentBox}>
         <div className={styles.commentContent}>

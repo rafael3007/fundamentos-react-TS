@@ -41,7 +41,7 @@ export function Post({ author, content, publishedAt }: PostProps) {
     },
   ]);
 
-  const [newComment, setNewComment] = useState({
+  const [newComment, setNewComment] = useState<CommentProp>({
     id: "5" + comments.length.toString(),
     author: {
       avatarUrl: "https://github.com/rafael3007.png",
@@ -131,7 +131,7 @@ export function Post({ author, content, publishedAt }: PostProps) {
         })}
       </div>
 
-      <form className={styles.commentForm}  onSubmit={handleAddComment}>
+      <form className={styles.commentForm} onSubmit={handleAddComment}>
         <strong>Deixe seu feddback</strong>
         <textarea
           placeholder="Deixe um comentário"
@@ -159,7 +159,7 @@ export function Post({ author, content, publishedAt }: PostProps) {
               key={comment.id}
               index={i}
               publishedAt={comment.publishedAt}
-              comment={comment.content}
+              comment={comment.content ?? ""}
               author={comment.author}
               onRemoveComment={handleRemoveComment}
             />
